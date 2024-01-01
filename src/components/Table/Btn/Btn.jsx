@@ -1,0 +1,73 @@
+import "./Btn.css"
+
+export const Btns = ({ tables, setTable, tableArray, setIsSelect, isSelect, selectArray, setSelectArray, setMessage, setTableSelect, moveArray, setMoveArray, setMixCount, mixCount }) => {
+    const usedNum = new Set();
+
+    //席替え開始ボタン
+    const handleStartClick = () => {
+        setTable((prev) => {
+            //chatGPT
+            const newTable = [...prev];
+            for (let i = 0; i < tables.length; i++) {
+                for (let j = 0; j < tables[i].length; j++) {
+                    let RandomNum;
+
+                    // moveArrayとselectArrayの対応を確認し、固定された席ならばその値を使う
+                    const moveIndex = moveArray.findIndex(([moveRowIndex, moveColIndex]) => i === moveRowIndex && j === moveColIndex);
+                    if (moveIndex !== -1) {
+                        const selectNum = selectArray[moveIndex];
+                        newTable[i][j] = selectNum;
+                        usedNum.add(selectNum);
+                    } else {
+                        // ランダムな数字を生成
+                        do {
+                            RandomNum = Math.floor(Math.random() * 41) + 1;
+                        } while (usedNum.has(RandomNum));
+
+                        newTable[i][j] = RandomNum;
+                        usedNum.add(RandomNum);
+                    }
+                }
+            }
+            // usedNumを初期化
+            usedNum.clear();
+            return [...prev];
+        });
+        setIsSelect(false)
+        setMixCount(mixCount + 1)
+        setMessage("固定したい人の番号を選択してください")
+        // setTableSelect(false)
+    }
+
+    //リセットボタン
+    const handleResetClick = () => {
+        setIsSelect(false)
+        setSelectArray([])
+        setTable(tableArray)
+        setMessage("固定したい人の番号を選択してください")
+        setTableSelect(false);
+        setMoveArray([]);
+        setSelectArray([]);
+        setMixCount(0)
+    }
+    //席固定キャンセルボタン
+    const cancelClick = () => {
+        setIsSelect(false);
+        setSelectArray([]);
+        setTableSelect(false);
+        setMoveArray([]);
+        setSelectArray([]);
+    }
+
+    return (
+        <>
+            <div className="btns container">
+                <div className="btn btn-outline-danger" onClick={handleResetClick}>リセット</div>
+                <div className='btn btn-outline-primary' onClick={handleStartClick} >席替え開始</div>
+                <div className="btn btn-outline-success" onClick={() => { setIsSelect(true) }} >席固定</div>
+                {isSelect && <div className="btn clear-btn btn-outline-secondary" onClick={cancelClick}>キャンセル</div>}
+            </div>
+        </>
+    )
+
+}

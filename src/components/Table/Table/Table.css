@@ -1,0 +1,25 @@
+.table {
+    width: 140px;
+    height: 90px;
+    border: 1px solid blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.table.hover:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+.table.selected {
+    background-color: lightgreen;
+    pointer-events: none;
+}
+
+.table.move {
+    background-color: rgb(240, 190, 243);
+    pointer-events: none;
+
+}
