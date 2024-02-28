@@ -13,12 +13,23 @@ function App() {
   const [message, setMessage] = useState("");
   const [mixCount, setMixCount] = useState(0);
 
+  const putXlsx = () => {
+  const XLSX = require("xlsx");
+  //新しいワークブックを作る
+    const workbook = XLSX.utils.book_new();
+    //ワークブックにデータを書き込む
+    const worksheet = XLSX.utils.json_to_sheet(tables);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Seating Arrangement");
+    //Excelファイルを保存
+    XLSX.writeFile(workbook, "2-6席替え.xlsx");
+  }
   return (
     <div className="sekigae">
       <div className='count'>
         <div className='count-title'>席替え回数カウンター</div>
         <div className='mix-count'>{mixCount}</div>
       </div>
+      <div className='xlsx btn btn-outline-info' onClick={putXlsx} >Excelに保存</div>
       <div className='title'>席替え</div>
       <Btns tables={tables} setTable={setTable} tableArray={tableArray} setIsSelect={setIsSelect} isSelect={isSelect}
         setSelectArray={setSelectArray} selectArray={selectArray} setMessage={setMessage} setTableSelect={setTableSelect}
@@ -32,7 +43,7 @@ function App() {
           return y.map((x, xIndex) => {
             return <Table x={x} tables={tables} selectArray={selectArray} isSelect={isSelect} yIndex={yIndex} xIndex={xIndex} setSelectArray={setSelectArray}
               setMessage={setMessage} setTableSelect={setTableSelect} tableSelect={tableSelect}
-              setMoveArray={setMoveArray} moveArray={moveArray} key={x}></Table>
+              setMoveArray={setMoveArray} moveArray={moveArray} key={xIndex}></Table>
           })
         })}
       </div>

@@ -11,7 +11,7 @@
 .count {
     width: 220px;
     height: 180px;
-    background-color:  #bc7b30;
+    background-color: #bc7b30;
     color: white;
     font-size: 44px;
     position: absolute;
@@ -30,6 +30,12 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
+}
+
+.xlsx {
+    position: absolute;
+    left: 3.5%;
+    top: 35%;
 }
 
 .title {
@@ -61,8 +67,10 @@
 
 .board {
     display: grid;
-    width: 980px;
+    width: 1100px;
     grid-template-columns: repeat(7, 140px);
     grid-auto-rows: 90px;
+    column-gap: 15px;
+    row-gap: 15px;
     margin: auto;
 }
