@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .table {
     width: 140px;
     height: 90px;
@@ -23,4 +24,31 @@
     background-color: rgb(240, 190, 243);
     pointer-events: none;
 
+=======
+.table {
+    width: 140px;
+    height: 90px;
+    border: 1px solid rgb(235, 90, 155);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.table.hover:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+.table.selected {
+    background-color: lightgreen;
+    pointer-events: none;
+}
+
+.table.move {
+    background-color: rgb(240, 190, 243);
+    pointer-events: none;
+
+>>>>>>> ffca050e9e32083e8356bb4bb4b01a58724f7cd7
 }
